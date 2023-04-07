@@ -18,4 +18,6 @@ elif n < 90 and n >= 80:
 elif n < 80 and n >= 70:
     print("C")
 elif n < 70 and n >= 60:
-    print("C")
+    print("D")
+elif n < 60:
+    print("F")
