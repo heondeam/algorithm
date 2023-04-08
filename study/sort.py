@@ -18,4 +18,36 @@ def bubble_sort(list):
 
     return list
 
-print(bubble_sort([65, 55, 45, 34, 25, 15, 10]))
+# print(bubble_sort([65, 55, 45, 34, 25, 15, 10]))
+
+
+# p.96 연습문제 4
+
+def greatestNumber(array):
+    greatestNumber = 0
+
+    for i in array:
+        if i > greatestNumber :
+            greatestNumber = i
+
+    return greatestNumber
+
+
+# 선택정렬 구현
+def selection_sort(list):
+
+    for i in range(len(list)):
+        lowestNumberIndex = i
+
+        for j in range(i + 1, len(list)):
+            if list[j] < list[lowestNumberIndex]:
+                lowestNumberIndex = j
+
+        if lowestNumberIndex != i:
+            temp = list[i]
+            list[i] = list[lowestNumberIndex]
+            list[lowestNumberIndex] = temp
+
+    return list
+
+print(selection_sort([4, 2, 1, 7, 3]))
