@@ -20,4 +20,4 @@ x,y,w,h = map(int, input_text)
 # 직사각형의 각 변으로 향하는 거리중 가장 짧은 거리를 구한다.
 # 현수는 현재 x, y에 위치하고 있고 각 변으로 가는 거리는 x, y, h-y, w-x 가 되며 이중 최솟값이 정답이다.
 
-print(min(x, y, h-y, w-x))
+print(min(h-y, w-x, x, y))
