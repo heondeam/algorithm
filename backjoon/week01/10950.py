@@ -2,9 +2,9 @@ from sys import stdin as s
 
 s = open("input.txt", "rt")
 
-input_text = s.readlines()
+n = int(s.readline())
 
-loop_num = int(input_text[0])
+arr = [case.rstrip().split() for case in s.readlines()]
 
 """ 
 문제
@@ -12,13 +12,7 @@ loop_num = int(input_text[0])
 두 정수 A와 B를 입력받은 다음, A+B를 출력하는 프로그램을 작성하시오.
 """
 
-# print(input_text)
-
-now_loop_num = 1
-
-while now_loop_num <= loop_num :
-    a, b = map(int ,input_text[now_loop_num].split(" "))
+for i in range(n):
+    a, b = int(arr[i][0]), int(arr[i][1])
 
     print(a + b)
-    now_loop_num += 1
-
