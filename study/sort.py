@@ -50,7 +50,7 @@ def selection_sort(list):
 
     return list
 
-print(selection_sort([4, 2, 1, 7, 3]))
+# print(selection_sort([4, 2, 1, 7, 3]))
 
 
 # 삽입정렬 구현
@@ -70,3 +70,22 @@ def insertion_sort(array):
         array[position + 1] = temp_value
 
     return array
+
+
+# 퀵 정렬 구현
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+
+    return quick_sort(left) + middle + quick_sort(right)
+
+
+new_arr = [32, 44, 11, 53, 87, 23, 66 , 12, 54, 72]
+
+
+print(quick_sort(new_arr))
