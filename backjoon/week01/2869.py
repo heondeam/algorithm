@@ -18,14 +18,25 @@ s = open("input.txt", "rt")
 
 """
 
-# A = 올라갈 수 있는 거리 , B = 미끄러지는 거리 , V = 나무막대의 높이
-# 올라가야 할 거리 = V - B
-# 낮에만 올라갈 수 있으므로 하루에 갈 수 있는 거리 = A - B
-input_list = [int(a) for a in s.readline().split()]
+A, B, V = map(int, s.readline().split())
 
-day_height = input_list[0]
-night_height = input_list[1]
-full_height = input_list[2]
+# 낮에 올라가는 높이 A
+# 밤에 미끄러지는 높이 B
+# 하루동안 올라간 높이 A - B
+# 낮에 정상에 도달하면 저녁에 미끄러지지 않는다.
 
-# 올라갔다가, 내려간다는 것을 생각해야한다. 
-print(math.ceil((full_height - night_height) / (day_height - night_height)))
+# 현재높이 = 0
+# DAYS = 0
+
+# while 현재높이 < V:
+#     DAYS += 1
+#     현재높이 += A
+#     if 현재높이 >= V:
+#         break
+#     현재높이 -= B
+
+# print(DAYS)
+
+
+DAYS = math.ceil((V - B) / (A - B))
+print(DAYS)
