@@ -2,7 +2,7 @@
 
 
 
-# 버블정렬 구현
+# 버블 정렬 구현
 def bubble_sort(list):
     last_index = len(list) - 1
     isSorted = False
@@ -33,7 +33,7 @@ def greatestNumber(array):
     return greatestNumber
 
 
-# 선택정렬 구현
+# 선택 정렬 구현
 def selection_sort(list):
 
     for i in range(len(list)):
@@ -53,7 +53,7 @@ def selection_sort(list):
 # print(selection_sort([4, 2, 1, 7, 3]))
 
 
-# 삽입정렬 구현
+# 삽입 정렬 구현
 def insertion_sort(array):
     for index in range(1, len(array)):
 
@@ -80,7 +80,7 @@ def quick_sort(arr):
     pivot = arr[len(arr) // 2]
     left = [x for x in arr if x < pivot]
     middle = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
+    right = [x for x in arr if x > pivot]ㄴ
 
     return quick_sort(left) + middle + quick_sort(right)
 
@@ -88,4 +88,7 @@ def quick_sort(arr):
 new_arr = [32, 44, 11, 53, 87, 23, 66 , 12, 54, 72]
 
 
-print(quick_sort(new_arr))
+# print(quick_sort(new_arr))
+
+
+# 계수 정렬 구현
