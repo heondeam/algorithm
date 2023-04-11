@@ -19,16 +19,18 @@ N개의 정수로 이루어진 배열 A가 주어진다.
 
 n = int(s.readline())
 data = [int(a) for a in s.readlines()[0].split()]
-arr = list(permutations(data, n))
+arr = list(permutations(data, 8))
 ans = []
 
-for x in arr:
-    sum = 0
+print(len(arr))
 
-    for j in range(n - 1):
-        sum += abs(x[j] - x[j+1])
+# for x in arr:
+#     sum = 0
 
-    ans.append(sum)
+#     for j in range(n - 1):
+#         sum += abs(x[j] - x[j+1])
+
+#     ans.append(sum)
 
 
-print(max(ans))
+# print(max(ans))
