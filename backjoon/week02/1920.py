@@ -13,40 +13,34 @@ N개의 정수 A[1], A[2], …, A[N]이 주어져 있을 때, 이 안에 X라는
 M개의 줄에 답을 출력한다. 존재하면 1을, 존재하지 않으면 0을 출력한다.
 """
 
-def binary_search(n):
-    global A
 
-    # 좌측 포인터 (인덱스)
-    lt = 0
-    # 우측 포인터 (인덱스)
-    rt = len(A) - 1
 
-    while lt <= rt:
-        # 중간값의 인덱스
-        mid = (lt+rt) // 2
+def binary_search(num):
+    """
+        num : 찾는 값
+    """
+    global a
 
-        if A[mid] == n:
-            print(1)
-            break
-        
-        if n < A[mid]:
-            rt = mid - 1
-        elif n > A[mid]:
-            lt = mid + 1
+    start = 0
+    end = len(a) - 1
 
-    else: 
-        print(0)
+    while start <= end:
+        mid = (start + end) // 2
 
+        if a[mid] == num:
+            return True
+        elif a[mid] < num:
+            start = mid + 1
+        elif a[mid] > num:
+            end = mid - 1
 
 if __name__ == "__main__":
-    input_data = [a.rstrip().split() for a in s.readlines()]
+    input_datas = [list(map(int, s.readline().rstrip().split())) for _ in range(4)]
+    n, a, m, data = input_datas[0][0], input_datas[1], input_datas[2][0], input_datas[3]
+    a.sort()
 
-    N, M = int(input_data[0][0]), int(input_data[2][0])
-
-    A = list(map(int, input_data[1]))
-    nums = list(map(int, input_data[3]))
-
-    A.sort()
-
-    for i in range(M):
-        binary_search(nums[i])
+    for i in range(len(data)):
+        if binary_search(data[i]):
+            print(1)
+        else:
+            print(0)
