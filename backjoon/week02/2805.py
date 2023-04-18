@@ -16,49 +16,45 @@ s = open("input.txt", "rt")
 이때, 적어도 M미터의 나무를 집에 가져가기 위해서 절단기에 설정할 수 있는 높이의 최댓값을 구하는 프로그램을 작성하시오.
 
 첫째 줄에 나무의 수 N과 상근이가 집으로 가져가려고 하는 나무의 길이 M이 주어진다. (1 ≤ N ≤ 1,000,000, 1 ≤ M ≤ 2,000,000,000)
-둘째 줄에는 나무의 높이가 주어진다. 나무의 높이의 합은 항상 M보다 크거나 같기 때문에, 상근이는 집에 필요한 나무를 항상 가져갈 수 있다. 높이는 1,000,000,000보다 작거나 같은 양의 정수 또는 0이다.
+둘째 줄에는 나무의 높이가 주어진다. 나무의 높이의 합은 항상 M보다 크거나 같기 때문에, 
+상근이는 집에 필요한 나무를 항상 가져갈 수 있다. 높이는 1,000,000,000보다 작거나 같은 양의 정수 또는 0이다.
 
 적어도 M미터의 나무를 집에 가져가기 위해서 절단기에 설정할 수 있는 높이의 최댓값을 출력한다.
 """
 
-def count(h):
-    global N, heights
 
-    # 잘라낸 나무들
+def count(h):
+    global trees
+
     cuts = []
 
-    for i in range(N):
-        if heights[i] - h >= 0:
-            cuts.append(heights[i] - h)
+    for i in range(len(trees)):
+        if trees[i] - h > 0:
+            cuts.append(trees[i] - h)
 
     return sum(cuts)
 
-def find_tree(h):
-    global res
+def binary_search():
+    global trees, m, res
 
-    lt = 1
-    rt = lagest
+    start = 1
+    end = max(trees)
 
-    while lt <= rt:
-        mid = (lt + rt) // 2
+    while start <= end:
+        mid = (start + end) // 2
 
-        if count(mid) >= h:
+        if count(mid) >= m:
             res = mid
-            lt = mid + 1
-        elif count(mid) < h:
-            rt = mid - 1
-
+            start = mid + 1
+        else:
+            end = mid - 1
 
 if __name__ == "__main__":
-    input_data = [list(map(int, s.readline().split())) for _  in range(2)]
-
-    N, M = input_data[0][0], input_data[0][1]
-    heights = input_data[1]
+    n, m = list(map(int, s.readline().rstrip().split()))
+    trees = list(map(int, s.readline().rstrip().split()))
+    trees.sort()
     res = 0
+    binary_search()
 
-    # 모든 나무의 높이를 더한 것 이하가 답의 범위가 된다.
-    lagest = max(heights)
-
-    find_tree(M)
 
     print(res)
