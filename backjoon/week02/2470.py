@@ -60,6 +60,7 @@ if __name__ == "__main__":
     solutions = list(map(int, s.readline().rstrip().split()))
     solutions.sort()
 
+    # 최대 + 최소의 절댓값이 현재 가장 작은 값이라고 가정
     ans = abs(max(solutions) + min(solutions))
 
     find_answer()
