@@ -18,39 +18,45 @@ C개의 공유기를 N개의 집에 적당히 설치해서, 가장 인접한 두
 첫째 줄에 가장 인접한 두 공유기 사이의 최대 거리를 출력한다.
 """
 
+
+def count(d):
+    global maps, c
+
+    # 첫번째 공유기의 위치는 무조건 첫번째 집에 놓는다.
+    cnt = 1
+
+    # 마지막 공유기를 놓은 위치
+    ep = maps[0]
+
+    for i in range(len(maps)):
+        # 현재 집과 마지막으로 공유기를 놓은 집의 거리가 
+        # d(가장 가까운 공유기 간의 거리)보다 크거나 같으면 공유기를 놓는다
+        if i != 0 and maps[i] - ep >= d:
+            cnt += 1
+            ep = maps[i]
+
+    return cnt
+
 def find_distance():
-    global C, res, maps
+    global maps, c, res
 
     start = 1
     end = max(maps)
 
     while start <= end:
-        mid = (start + end) // 2
+        mid = (start + end) // 2 
 
-        # 공유기가 설치된 집의 위치
-        current = maps[0]
-
-        # 현재 설치된 공유기 개수
-        count = 1
-        
-        for map in maps:
-            if map >= current + mid :
-                count += 1
-                current = map
-
-        if count >= C :
-            start = mid + 1
+        if count(mid) >= c:
             res = mid
-        elif count < C :
+            start = mid + 1
+        else:
             end = mid - 1
-    else:
-        print(res)
 
 if __name__ == "__main__":
-    N, C = list(map(int, s.readline().split()))
-    maps = [int(s.readline().rstrip()) for _ in range(N)]
-
+    n, c = list(map(int, s.readline().rstrip().split()))
+    maps = [int(a.rstrip()) for a in s.readlines()]
     maps.sort()
     res = 0
 
     find_distance()
+    print(res)
