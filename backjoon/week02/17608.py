@@ -18,20 +18,16 @@ N개의 막대기에 대한 높이 정보가 주어질 때, 오른쪽에서 보�
 
 오른쪽에서 N개의 막대기를 보았을 때, 보이는 막대기의 개수를 출력한다.
 """
+n = int(s.readline().rstrip())
+sticks = [int(s.readline().rstrip()) for _ in range(n)]
+view = sticks.pop()
+cnt = 1
 
-if __name__ == "__main__":
-    N = int(s.readline())
-    sticks = []
+for i in range(n-2, -1, -1):
+    if sticks[i] <= view:
+        sticks.pop()
+    else:
+        view = sticks.pop()
+        cnt += 1
 
-    for _ in range(N):
-        bar = int(s.readline().rstrip())
-
-        # sticks가 빈리스트가 아니고, 마지막 원소가 현재 원소보다 작거나 같으면 이전 원소를 제거한다.
-        while sticks and sticks[-1] <= bar:
-            sticks.pop()
-        
-        # bar를 push 한다.
-        sticks.append(bar)
-
-    # stack에 남아있는 원소들이 보이는 빌딩이 된다.
-    print(len(sticks))
+print(cnt)
