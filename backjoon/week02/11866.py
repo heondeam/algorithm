@@ -22,24 +22,27 @@ N과 K가 주어지면 (N, K)-요세푸스 순열을 구하는 프로그램을 �
 """
 N, K = list(map(int, s.readline().rstrip().split()))
 queue = deque([a for a in range(1, N + 1)])
-
-cnt = 0
 ans = []
 
-while queue:
-    num = queue.popleft()
-    cnt += 1
+cnt = 0
 
+while True:
+    if len(queue) == 1:
+        ans.append(queue[0])
+        break
+
+    num = deque.popleft(queue)
+    cnt += 1
+    
     if cnt == K:
         ans.append(num)
         cnt = 0
     else:
-        queue.append(num)
+        deque.append(queue, num)
 
 print("<", end="")
 for i in range(len(ans)):
-    if not i == (len(ans) -1):
+    if i != len(ans) - 1:
         print(ans[i], end=", ")
     else:
-        print(ans[i], end=">") 
-
+        print(ans[i], end=">")

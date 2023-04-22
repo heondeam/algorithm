@@ -19,6 +19,20 @@ N은 1보다 크거나 같고, 100,000보다 작거나 같은 자연수이다.
 
 한 줄에 하나씩 N줄에 걸쳐 백준이의 동생이 말해야 하는 수를 순서대로 출력한다.
 """
+
+
+""" 
+ 1. 중간값이라는 것은 주어진 N개의 수 중 중간에 위치한 값이기 때문에 
+ 값을 leftheap과 rightheap에 번갈아 넣어줌으로써 두 힙의 균형(개수)을 유지하도록 하여
+ leftHeap에서 pop을 했을 때 바로 중간값을 구할 수 있도록 한다.
+
+ 2. leftheap은 최대힙으로 rightheap은 최소힙으로 구성을 함으로써 leftheap의 
+ 첫 원소를 중간값으로 만들 수 있다.
+
+ 3. leftheap에 rightheap보다 큰 숫자가 들어가는 경우 두 숫자를 교환한다.
+ 그리고 leftheap의 최댓값과 rightheap의 최솟값을 비교하여 더 작은수인 leftheap의 최댓값을 출력한다.
+
+"""
 n = int(s.readline().rstrip())
 numbers = [int(a) for a in s.readlines()]
 # 중간값보다 작은 수가 들어감 최대힙 구현
@@ -26,31 +40,24 @@ leftheap = []
 # 중간값보다 큰 수가 들어감 최소힙 구현
 rightheap = []
 
+
 for i in range(n):
     num = numbers[i]
 
-    # leftheap의 길이가 rightheap의 길이와 같다면
     if len(leftheap) == len(rightheap):
-        # leftheap에 현재 숫자를 음수 형태로 삽입 (최대힙 구현)
-        heapq.heappush(leftheap, (-num, num))
-    
-    # 길이가 다르다면
+        heapq.heappush(leftheap, -num)
     else:
-        # rightheap에 현재 숫자를 삽입
-        heapq.heappush(rightheap, (num))
+        heapq.heappush(rightheap, num)
 
-    # 양쪽 heap에 요소들이 존재한다면, 
-    # leftheap의 루트에 음수를 곱한 값이 rightheap의 루트보다 크다면?
-    if (len(leftheap) >= 1 and len(rightheap) >= 1 and leftheap[0][1] > rightheap[0]):
-        # leftheap의 루트를 제거하고, 
-        leftroot = heapq.heappop(leftheap)
-        # leftheap의 루트에 음수를 곱한 값을 rightheap에 삽입
-        heapq.heappush(rightheap, leftroot[0][1])
+    if leftheap and rightheap and -leftheap[0] > rightheap[0]:
+        leftValue = -heapq.heappop(leftheap)
+        rightValue = heapq.heappop(rightheap)
 
-        # rightheap의 루트를 제거하고, 
-        rightroot = heapq.heappop(rightheap)
-        # rightheap의 루트에 음수를 곱한 값을 leftheap에 삽입
-        heapq.heappush(leftheap, (-rightroot, rightroot))
+        heapq.heappush(leftheap, -rightValue)
+        heapq.heappush(rightheap, leftValue)
 
-    # leftheap의 루트에 음수를 곱한 뒤 출력
-    print(leftheap[0][1])
+    print(-leftheap[0])
+    
+
+
+

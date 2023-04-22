@@ -32,8 +32,13 @@ N = int(s.readline())
 queue = deque([i for i in range(1, N+1)])
 
 while len(queue) > 1:
-    queue.popleft()
-    num = queue.popleft()
-    queue.append(num)
+    deque.popleft(queue)
+    num = deque.popleft(queue)
+    deque.append(queue, num)
 
-print(queue[0])
+print(queue[-1])
+
+
+
+
+

@@ -24,6 +24,7 @@ datas = [int(s.readline().rstrip()) for _ in range(n)]
 heap = []
 
 for i in range(n):
+
     if datas[i] != 0:
         heapq.heappush(heap, (-datas[i], datas[i]))
     else:

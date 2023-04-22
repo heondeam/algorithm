@@ -20,14 +20,12 @@ N개의 정수로 이루어진 수열이 있을 때,
 
 첫째 줄에 합이 S가 되는 부분수열의 개수를 출력한다.
 """
-
 def find_answer(L, arr):
     global ans, cnt
 
     if L == N:
-        if len(ans) > 0:
-            if sum(ans) == S:
-                cnt += 1
+        if len(ans) > 0 and sum(ans) == S:
+            cnt += 1
 
         return 
     else:

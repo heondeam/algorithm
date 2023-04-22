@@ -28,30 +28,35 @@ N = int(s.readline().rstrip())
 
 queue = deque([])
 
-for i in range(N):
-    command = s.readline().split()
 
-    if command[0] == "push":
-        queue.append(int(command[1]))
-    elif command[0] == "pop":
+for i in range(N):
+    command = s.readline().rstrip().split()
+
+    if command[0] == 'push':
+        deque.append(queue, int(command[1]))
+    elif command[0] == 'pop':
         if queue:
-            print(queue.popleft())
+            print(deque.popleft(queue))
         else:
             print(-1)
-    elif command[0] == "size":
+    elif command[0] == 'size':
         print(len(queue))
-    elif command[0] == "empty":
+    elif command[0] == 'empty':
         if queue:
             print(0)
         else:
             print(1)
-    elif command[0] == "front":
+    elif command[0] == 'front':
         if queue:
             print(queue[0])
         else:
             print(-1)
-    elif command[0] == "back":
+    elif command[0] == 'back':
         if queue:
             print(queue[-1])
-        else: 
+        else:
             print(-1)
+    
+
+
+

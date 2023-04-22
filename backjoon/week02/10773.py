@@ -16,18 +16,15 @@ s = open("input.txt", "rt")
 
 재민이가 최종적으로 적어 낸 수의 합을 출력한다. 최종적으로 적어낸 수의 합은 2^31-1보다 작거나 같은 정수이다.
 """
+k = int(s.readline().rstrip())
+numbers = [int(s.readline().rstrip()) for _ in range(k)]
 
-if __name__ == "__main__":
-    K = int(s.readline().rstrip())
+myStack = []
 
-    cases = list(map(int, s.readlines()))
-
-    myStack = []
-
-    for case in cases:
-        if case != 0:
-            myStack.append(case)
-        elif case == 0:
-            myStack.pop()
-
+for i in range(k):
+    if numbers[i] == 0:
+        myStack.pop()
+    else:
+        myStack.append(numbers[i])
+else:
     print(sum(myStack))

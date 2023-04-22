@@ -14,15 +14,15 @@ numbers = list(map(int, s.readline().rstrip()))
 
 stack = []
 
-for number in numbers:
-    while stack and stack[-1] < number and K > 0:
+for i in range(N):
+    while stack and stack[-1] < numbers[i] and K > 0:
         stack.pop()
         K -= 1
-    
-    stack.append(number)
+
+    stack.append(numbers[i])
 
 if K > 0:
     stack = stack[:-K]
 
-for el in stack:
-    print(el, end="")
+for n in stack:
+    print(n, end="")

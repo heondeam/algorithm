@@ -20,32 +20,30 @@ top: 스택의 가장 위에 있는 정수를 출력한다. 만약 스택에 들
 
 출력해야하는 명령이 주어질 때마다, 한 줄에 하나씩 출력한다.
 """
+n = int(s.readline().rstrip())
+commands = [s.readline().rstrip().split() for _ in range(n)]
+stack = []
 
-N = int(s.readline().rstrip())
+for i in range(n):
+    cmd = commands[i][0]
 
-commands = [list(s.readline().rstrip().split()) for _ in range(N)]
-
-myStack = []
-
-for cmd in commands:
-    if len(cmd) > 1:
-        myStack.append(cmd[1])
-    else:
-        if cmd[0] == "pop":
-            if len(myStack) >= 1:
-                print(myStack[-1])
-                myStack.pop()
-            else:
-                print(-1)
-        elif cmd[0] == "size":
-            print(len(myStack))
-        elif cmd[0] == "empty":
-            if len(myStack) == 0:
-                print(1)
-            else: 
-                print(0)
-        elif cmd[0] == "top":
-            if len(myStack) >= 1:
-                print(myStack[-1])
-            else:
-                print(-1)
+    if cmd == "push":
+        stack.append(commands[i][1])
+    elif cmd == "top":
+        if stack:
+            print(stack[-1])
+        else:
+            print(-1)
+    elif cmd == "pop":
+        if stack:
+            num = stack.pop()
+            print(num)
+        else:
+            print(-1)
+    elif cmd == "size":
+        print(len(stack))
+    elif cmd == "empty":
+        if stack:
+            print(0)
+        else:
+            print(1)

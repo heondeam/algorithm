@@ -29,24 +29,27 @@ N과 비용 행렬이 주어졌을 때, 가장 적은 비용을 들이는 외판
 N = int(s.readline())
 maps = [] 
 
+# 2차원 리스트 형식으로 행렬을 표현
 for _ in range(N):
     maps.append(list(map(int, s.readline().split())))
 
+# 최댓값을 선언
 ans = int(1e9)
+# 도시의 갯수만큼 원소를 가진 리스트를 만든다.
 a = [i for i in range(N)]
 
-cnt = list(permutations(a, N))
+cases = list(permutations(a, N))
 
-for c in cnt:
+for case in cases:
     sub = 0
     for j in range(N-1):
-        if maps[c[j]][c[j+1]] == 0:
+        if maps[case[j]][case[j+1]] == 0:
             break
         else: 
-            sub += maps[c[j]][c[j+1]]
+            sub += maps[case[j]][case[j+1]]
     else:
-        if maps[c[-1]][c[0]] != 0:
-            sub += maps[c[-1]][c[0]]
+        if maps[case[-1]][case[0]] != 0:
+            sub += maps[case[-1]][case[0]]
             ans = min(ans, sub)
 
 print(ans)

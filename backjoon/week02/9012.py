@@ -21,30 +21,24 @@ s = open("input.txt", "rt")
 출력은 표준 출력을 사용한다. 
 만일 입력 괄호 문자열이 올바른 괄호 문자열(VPS)이면 “YES”, 아니면 “NO”를 한 줄에 하나씩 차례대로 출력해야 한다. 
 """
+t = int(s.readline().rstrip())
+datas = [s.readline().rstrip() for _ in range(t)]
 
-def isVps(case):
-    stack = []
+for i in range(t):
+    myStack = []
 
-    for c in case:
-        if c == "(":
-            stack.append(c)
-        elif c == ")":
-            if len(stack) >= 1:
-                if stack[-1] == "(":
-                    stack.pop()
-                elif stack[-1] == ")" or len(stack) == 0:
-                    return "NO"
+    for s in datas[i]:
+        if s == "(":
+            myStack.append(s)
+        elif s == ")":
+            if myStack:
+                myStack.pop()
             else:
-                return "NO"
+                print("NO")
+                break
+    
     else:
-        if len(stack) == 0:
-            return "YES"
+        if myStack:
+            print("NO")
         else:
-            return "NO"
-
-if __name__ == "__main__":
-    T = int(s.readline().rstrip())
-    cases = [list(s.readline().rstrip()) for _ in range(T)]
-
-    for case in cases:
-        print(isVps(case))
+            print("YES")
