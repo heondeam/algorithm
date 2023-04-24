@@ -16,59 +16,91 @@ s = open("input.txt", "rt")
 
 첫째 줄에 DFS를 수행한 결과를, 그 다음 줄에는 BFS를 수행한 결과를 출력한다. V부터 방문된 점을 순서대로 출력하면 된다.
 """
-def DFS(v):
-    global graph
+# def DFS(s):
+#     """ s: 탐색을 시작할 노드 """
+#     global markForDfs
 
-    # 해당 정점에 방문 처리
-    markForDfs[v] = 1
+#     # 방문한 s를 출력
+#     print(s, end=" ")
 
-    # 해당 노드 출력
-    print(v, end=" ")
+#     # s에 대해 방문 표시
+#     markForDfs[s] = 1
 
-    # 해당 노드의 인접한 노드들에 대해서 방문 여부 확인 및 재귀적으로 방문 처리
-    for s in graph[v]:
-        if markForDfs[s] != 1:
-            DFS(s)
+#     # s에 인접한 노드들에 대해 DFS를 재귀적으로 실행
+#     # 방문하지 않은 노드들에만 탐색 
+#     for i in graph[s]:
+#         if markForDfs[i] != 1:
+#             DFS(i)
+            
+# def DFS(s):
+#     """ s: 탐색을 시작할 노드 """
+#     global markForDfs
 
-def BFS(v):
-    global graph
+#     # DFS 탐색을 위한 스택 생성 및 시작 노드 삽입
+#     stackForDfs = [s]
 
-    myQueue = deque([v])
+#     # 현재 노드를 방문 표시
+#     markForDfs[s] = 1
 
-    # 탐색할 노드를 큐에 삽입하고 방문 처리한다.
-    markForBfs[v] = 1
+#     # 스택이 빌 때까지 루프 수행
+#     while stackForDfs:
+#         # 스택의 맨 위 노드를 팝하고 출력
+#         nowVertex = stackForDfs.pop()
+#         print(nowVertex, end=" ")
 
-    # 큐가 빌 때까지 반복한다.
-    while myQueue:
-        # 큐에서 노드를 꺼내고, 출력한다.
-        nowVertex = myQueue.popleft()
-        print(nowVertex, end = " ")
+#         # 인접한 노드 중에서 방문하지 않은 노드를 스택에 삽입
+#         for i in reversed(graph[nowVertex]):
+#             if markForDfs[i] != 1:
+#                 stackForDfs.append(i)
+#                 markForDfs[i] = 1
 
-        # 아직 방문하지 않은 인접한 원소들(초기 노드 v가 아님.)을 큐에 삽입한다.
-        for s in graph[nowVertex]:
-            if markForBfs[s] != 1:
-                myQueue.append(s)
-                markForBfs[s] = 1
+def BFS(s):
+    """ s: 탐색을 시작할 노드 """
+    global markForBfs
+
+    # BFS 탐색을 위한 큐 생성
+    # 처음 탐색한 노드를 큐에 푸시 후 방문 표시
+    queueForBfs = deque([s])
+    markForBfs[s] = 1
+
+    # 큐가 빌 때까지 루프 수행
+    while queueForBfs:
+        # 탐색한 노드를 큐에서 팝 그리고 출력
+        nowVertex = queueForBfs.popleft()
+        print(nowVertex, end=" ")
+
+        # 방금 탐색한 노드에 인접한 노드들을 모두 큐에 푸시 후
+        # 큐가 빌 때 까지 같은 과정 반복
+        for i in graph[nowVertex]:
+            if markForBfs[i] != 1:
+                queueForBfs.append(i)
+                markForBfs[i] = 1
 
 if __name__ == "__main__":
     n, m, v = list(map(int, s.readline().rstrip().split()))
 
-    graph = []
-
+    # 방문 표시를 위한 배열 생성 인덱스 0은 무시하고 1부터 순차적으로 생성
     markForDfs = [0] * (n + 1)
     markForBfs = [0] * (n + 1)
 
-    for i in range(0, n + 1):
+    # 2차원 리스트 형태로 노드와 해당 노드에 인접한 노드들을 표현
+    graph = []
+
+    # 편의를 위해 0번 인덱스는 생각하지 않음. 1부터 차례대로 노드
+    for i in range(n+1):
         graph.append([])
 
     for i in range(m):
         u, e = list(map(int, s.readline().rstrip().split()))
 
+        # 노드 v에 대해서 인접한 노드 e를 추가
         graph[u].append(e)
+        # 양방향 그래프이기 떄문에 양쪽으로 인접 노드를 표시하기 위해 추가
         graph[e].append(u)
 
-        graph[u].sort()
-        graph[e].sort()
+        # 낮은 번호부터 탐색할 것이기 때문에 정렬해줌.
+        # graph[u].sort()
+        # graph[e].sort()
 
     DFS(v)
     print()
