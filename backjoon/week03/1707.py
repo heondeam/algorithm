@@ -20,24 +20,28 @@ s = open("input.txt", "rt")
 K개의 줄에 걸쳐 입력으로 주어진 그래프가 이분 그래프이면 YES, 아니면 NO를 순서대로 출력한다.
 """
 
-def DFS(s):
-    """ s : 탐색을 시작할 노드 """
+def DFS(v):
+	
+	# 스택을 이용한 DFS 수행
+	# 튜플 형식으로 현재 정점값과 정점의 색을 스택에 푸시
+	# 미방문일 경우 0, 시작 정점 1 인접 정접 -1
+	myStack = [(v, 1)] 
+	color[v] = 1
 
-    # 튜플 형식으로 stack에 push하여 이전 정점의 색을 기록한다. 1로 시작 인접 정점들을 -1로 설정 아직 방문하지 않았다면 0으로 설정
-    myStack = [(s, 1)]
-    color[s] = 1
+	# 스택이 빌 때까지 루프 수행
+	while myStack:
+		nowVertex, nowColor = myStack.pop()
 
-    while myStack:
-        nowVertex, parent_color = myStack.pop()
+		# 현재 정점에 인접한 정점에 대해서 컬러 판별
+		for i in graph[nowVertex]:
+			if color[i] == 0:
+				myStack.append((i, -nowColor))
+				color[i] = -nowColor
 
-        for i in graph[nowVertex]:
-            if color[i] == 0:
-                myStack.append((i, color[nowVertex] * -1))
-                color[i] = color[nowVertex] * -1
-            elif color[i] == color[nowVertex]:
-                return False
-        
-    return True
+			elif color[i] == nowColor:
+				return False
+
+	return True
 
 if __name__ == "__main__":
     t = int(s.readline().rstrip())
