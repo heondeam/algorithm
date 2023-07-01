@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "ts-node": "^10.9.1"
+    "fs": "^0.0.1-security"
   }
 }
