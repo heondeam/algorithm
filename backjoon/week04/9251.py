@@ -22,8 +22,6 @@ if __name__ == "__main__":
 
     dp = [([0] * (len(y) + 1)) for _ in range(len(x) + 1)]
 
-    maxValue = 0
-
     for i in range(1, len(x) + 1):
         for j in range(1, len(y) + 1):
             if x[i-1] == y[j-1]:
@@ -31,7 +29,4 @@ if __name__ == "__main__":
             else:
                 dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 
-            if dp[i][j] > maxValue:
-                maxValue = dp[i][j]
-    else:
-        print(maxValue)
+    print(dp[-1][-1])
